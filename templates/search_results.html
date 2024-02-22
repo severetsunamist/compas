@@ -1,0 +1,21 @@
+{% for flat in paginated_objects %}
+<div class="col-3">
+        <div class="card shadow-sm" style="margin-top:15px;">
+            <a href="flat/{{flat.id}}"><img src="{{ flat.photos.first.img.url }}" alt="Card_Blank" width="100%" height="100%" style="border-radius:6px 6px 0px 0px;"></a>
+            <div class="card-body">
+                <p class="card-text"><b>{% if flat.name %}{{ flat.name }} {% endif %}</b></p>
+                <p class="card-text"><b> {% if flat.property_type != "Дом" %}Квартира{% endif %} {{ flat.property_type }}</b><br> {{ flat.gross_area }} м&#178;</p>
+                {% if flat.sale_price %}
+                <p class="card-text">Продаётся за <b>{{ flat.sale_price }} $</b></p>
+                {% endif %}
+                {% if flat.rental_price %}
+                <p class="card-text">Сдаётся за <b>{{ flat.rental_price }} $/мес</b></p>
+                {% endif %}
+                <div class="success">ID: #{{ flat.id }}</div>
+            </div>
+        </div>
+</div>
+{% endfor %}
+{% if is_search_view %}
+{% include 'search_paginator.html' %}
+{% endif %}

@@ -1,0 +1,27 @@
+<div class="row m-3" id="load-more" hx-swap-oob="true">
+        <div class="col-4 mx-auto">
+            {% if paginated_objects.has_next %}
+            <button class="col-10 btn btn-outline-primary"
+                hx-get="{% url 'search' %}"
+                hx-target="#search-results-div"
+                hx-vals='{"page": "{{ paginated_objects.next_page_number }}", "property_type": "{{ property_type }}"}'
+                hx-swap="beforeend">больше объявленний
+            </button>
+            {% endif %}
+        </div>
+    </div>
+<!--<div class="col-4 mx-auto">-->
+<!--    <div class="input-group">-->
+<!--        {% if paginated_objects.has_previous %}-->
+<!--        <button type="button" class="col-4 btn btn-outline-primary" onclick="navigateUrl('{{ request.get_full_path }}', {{ paginated_objects.previous_page_number }})"><b>Предыдущая</b></button>-->
+<!--        {% else %}-->
+<!--        <button type="button" class="col-4 btn btn-outline-primary" style="opacity:20%;" disabled><b>Предыдущая</b></button>-->
+<!--        {% endif %}-->
+<!--        <div class="col-4 input-group-text justify-content-center" >{{ paginated_objects.number }} / {{ paginated_objects.paginator.num_pages }}</div>-->
+<!--        {% if paginated_objects.has_next %}-->
+<!--        <button type="button" class="col-4 btn btn-outline-primary" onclick="navigateUrl('{{ request.get_full_path }}', {{ paginated_objects.next_page_number }})"> <b>Следующая</b></button>-->
+<!--        {% else %}-->
+<!--        <button type="button" class="col-4 btn btn-outline-primary" style="opacity:20%;" disabled><b>Следующая</b></button>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+<!--</div>-->

@@ -1,0 +1,17 @@
+{% extends "navbar.html" %}
+{% block listing %}
+{% load static %}
+
+<div class="container">
+  <div class="row">
+      <div class="col">
+            <form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
+                <p>Вы действительно хотите удалить "{{ delete_data.name }}" ( ID: {{ delete_data.pk }} )?</p>
+                <a href="{% url 'flat' pk %}" class="btn btn-success">Оставить</a>
+                <input type="submit" class="btn btn-danger" name="Confirm" value="Удалить">
+            </form>
+          </div>
+      </div>
+</div>
+
+{% endblock %}

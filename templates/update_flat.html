@@ -1,0 +1,417 @@
+{% extends "navbar.html" %}
+{% block navbar %}
+{{ form.media }}
+{% load static %}
+<div class="container"></div>
+    <div class="col mx-auto">
+        <form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
+            <div class="row g-2 mt-1">
+                <div class="col"><b>Редактировать объявление</b></div>
+            </div>
+            <div class="row g-2 mt-2">
+                <div class="col-2 col-offset"></div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-text">Заголовок</div>
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                Планировка
+                            </div>
+                            {{ form.property_type }}
+                        </div>
+                    </div>
+                <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                Статус проекта
+                            </div>
+                            {{ form.project_status }}
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                    </div>
+                </div>
+
+                <div class="row mt-1 g-1">
+                    <div class="col-2 col-offset"></div>
+                    <div class="col-2">
+                        <div class="col input-group">
+                            <div class="col-6 input-group-text">Продаётся</div>
+                            {{ form.sale_offered }}
+                            <label class="col btn btn-outline-primary" for="check_sale_offered">
+                                <svg id="unchecked-icon-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  style="display:none" class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/></svg>
+                                <svg id="checked-icon-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <div class="input-group-text col-6">
+                                Цена продажи
+                            </div>
+                            {{ form.sale_price }}
+                            <div class="input-group-text col-2">
+                                $
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        {{ form.tapu }}
+                            <label class="col-12 btn btn-outline-primary" for="check_tapu">
+                                Тапу
+                            </label>
+                    </div>
+                    <div class="col-1">
+                        {{ form.iskan }}
+                            <label class="col-12 btn btn-outline-primary" for="check_iskan">
+                                Искан
+                            </label>
+                    </div>
+                </div>
+                <div class="row mt-1 g-1">
+                    <div class="col-2 col-offset"></div>
+                    <div class="col-2">
+                        <div class="col input-group">
+                            <div class="col-6 input-group-text">Сдаётся</div>
+                            {{ form.rent_offered }}
+                            <label class="col btn btn-outline-primary" for="check_rent_offered">
+                                <svg id="checked-icon-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="display:none" class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                                <svg id="unchecked-icon-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/></svg>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col-5">
+                                Цена аренды
+                            </div>
+                            {{ form.rental_price }}
+                            <div class="input-group-text col-3">
+                                $/мес
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col-4">
+                                Депозит
+                            </div>
+                            {{ form.deposit }}
+                            <div class="input-group-text col-4">
+                                $
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col-4">
+                                Айдат
+                            </div>
+                            {{ form.condo_fee }}
+                            <div class="input-group-text col-4">
+                                TL/мес
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3 g-1">
+                    <div class="col-2 col-offset">
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-text col-3">
+                                Площадь
+                            </div>
+                            <div class="input-group-text col">
+                                Общая
+                            </div>
+                            {{ form.gross_area }}
+                            <div class="input-group-text col-1">
+                                м2
+                            </div>
+                            <div class="input-group-text col">
+                                Жилая
+                            </div>
+                            {{ form.net_area }}
+                            <div class="input-group-text col-1">
+                                м2
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col-4">
+                                Этаж
+                            </div>
+                            {{ form.floor }}
+                            <div class="input-group-text col-2">
+                                из
+                            </div>
+                            {{ form.total_floors }}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                Отопление
+                            </div>
+                            {{ form.heating }}
+                        </div>
+                    </div>
+                </div>
+                    <div class="row mt-3 g-1">
+                        <div class="col-2 col-offset"></div>
+                        <div class="col">
+                            <div class="input-group">
+                                    <div class="col input-group-text">Квартира</div>
+                                    {{ form.furnitured }}
+                                    <label class="col btn btn-outline-primary" for="check_furnitured">
+                                        Мебелированая
+                                    </label>
+                                    {{ form.internet }}
+                                    <label class="col btn btn-outline-primary" for="check_internet">
+                                        Интернет
+                                    </label>
+                                    {{ form.conditioner }}
+                                    <label class="col btn btn-outline-primary" for="check_conditioner">
+                                        Кондиционер
+                                    </label>
+                                    {{ form.fridge }}
+                                    <label class="col btn btn-outline-primary" for="check_fridge">
+                                        Холодильник
+                                    </label>
+                                    {{ form.cooker }}
+                                    <label class="col btn btn-outline-primary" for="check_cooker">
+                                        Плита
+                                    </label>
+
+                                    {{ form.washer }}
+                                    <label class="col btn btn-outline-primary" for="check_washer">
+                                        Стиралка
+                                    </label>
+                                    {{ form.dish_washer }}
+                                    <label class="col btn btn-outline-primary" for="check_dish_washer">
+                                        Посудомойка
+                                        </label>
+                                    {{ form.sea_view }}
+                                    <label class="col btn btn-outline-primary" for="check_sea_view">
+                                        Вид на море
+                                    </label>
+                            </div>
+                        </div>
+                        <div class="col-2 col-offset"></div>
+                </div>
+            <div class="row mt-1 g-1">
+                        <div class="col-2 col-offset"></div>
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="col input-group-text">Комплекс</div>
+                                    {{ form.private_territory }}
+                                    <label class="col btn btn-outline-primary" for="check_private_territory">
+                                        Территория
+                                    </label>
+                                    {{ form.security }}
+                                    <label class="col btn btn-outline-primary" for="check_security">
+                                        Охрана 24/7
+                                    </label>
+                                    {{ form.parking }}
+                                    <label class="col btn btn-outline-primary" for="check_parking">
+                                        Парковка
+                                    </label>
+                                    {{ form.pool }}
+                                    <label class="col btn btn-outline-primary" for="check_pool">
+                                        Бассейн
+                                    </label>
+                                    {{ form.playground }}
+                                    <label class="col btn btn-outline-primary" for="check_playground">
+                                        Площадка
+                                    </label>
+                                    {{ form.reserve_generator }}
+                                    <label class="col btn btn-outline-primary" for="check_reserve_generator">
+                                        Генератор
+                                    </label>
+                                    {{ form.gym }}
+                                    <label class="col btn btn-outline-primary" for="check_gym">
+                                        Спортзал
+                                    </label>
+                                    {{ form.spa }}
+                                    <label class="col btn btn-outline-primary" for="check_spa">
+                                        СПА
+                                    </label>
+                            </div>
+                        </div>
+                    <div class="col-2 col-offset"></div>
+                    </div>
+            <div class="row mt-1 g-1">
+                    <div class="col-2 col-offset"></div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col-7">
+                                Кол-во спален
+                            </div>
+                            {{ form.bedrooms }}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col-7">
+                                Кол-во ванных
+                            </div>
+                            {{ form.bathrooms }}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col-7">
+                                Кол-во WC
+                            </div>
+                            {{ form.wc }}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-text col">
+                                Кол-во балконов
+                            </div>
+                            {{ form.balcony }}
+                        </div>
+                    </div>
+
+
+                    <div class="row row mt-3 g-1">
+                        <div class="col-2 col-offset"></div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-text col-2">Локация</div>
+                                <div class="input-group-text col-2"><i>широта</i></div>
+                                {{ form.lat }}
+                                <div class="input-group-text col-2"><i>долгота</i></div>
+                                {{ form.lng }}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <div class="input-group-text col-3">Имя</div>
+                                {{ form.contact_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-1">
+                        <div class="col-2 col-offset"></div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-text col-2">Адрес</div>
+                                {{ form.address }}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                        <div class="input-group-text col-3">Телефон</div>
+                                        {{ form.contact_phone }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-1">
+                        <div class="col-2 col-offset"></div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-text col-2">Комментарий</div>
+                                {{ form.comment }}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <div class="input-group-text col-3">Telegram</div>
+                                {{ form.contact_tg }}
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+
+            <div class="row mt-3 g-1">
+                <div class="col-2 col-offset"></div>
+                <div class="col">
+                    {{ new_imgs }}
+                </div>
+                <div class="col-2 col-offset"></div>
+            </div>
+<!--            EXTENDS HERE -->
+
+
+                <div class="col-2 col-offset"></div>
+            </div>
+            <div class="row mt-1 g-1">
+                <div class="col-7 col-offset"></div>
+
+                <div class="col-2 col-offset"></div>
+            </div>
+            <div class="row mt-2 g-1">
+                <div class="col-4 col-offset"></div>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-primary col-4" value="Сохранить">
+                </div>
+                <div class="col-4 col-offset"></div>
+            </div>
+            </form>
+            <div class="container">
+                <div class="row mt-4 g-1">
+                        {% for i in current_imgs %}
+                        <div class="col-1">
+                            <form method="POST" action="{% url 'deletephoto' i.id %}">
+                                {% csrf_token %}
+                                <div class="container overlap-container">
+                                    <img src="{{ i.img.url }}" alt="[Photo]" height="75" width="100">
+                                    <div class="overlap-element">
+                                        <input class="btn btn-danger rounded-circle p-3 lh-1" type="submit" style="height:48px;width:48px;" value="&#10005;">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        {% endfor %}
+
+
+                    </div>
+        </div>
+    </div>
+</div>
+<script>
+    const arr_checkbox_ids = ['#check_sale_offered','#check_rent_offered','#check_furnitured',                              '#check_internet', '#check_conditioner', '#check_fridge',
+                              '#check_internet','#check_conditioner', '#check_fridge',
+                              '#check_cooker','#check_washer', '#check_dish_washer',
+                              '#check_sea_view', '#check_private_territory', '#check_security',
+                               '#check_parking', '#check_pool', '#check_playground',
+                               '#check_reserve_generator', '#check_gym', '#check_spa',
+                               '#check_tapu']
+    const arr_checkboxes = []
+    const arr_checked_icons = []
+    const arr_unchecked_icons = []
+
+    for (let i = 0; i < arr_checkbox_ids.length; i++) {
+        window.addEventListener('DOMContentLoaded', () => {
+            arr_checkboxes.push(document.querySelector(arr_checkbox_ids[i]));
+            arr_checked_icons.push(document.querySelector('#checked-icon-' + i));
+            arr_unchecked_icons.push(document.querySelector('#unchecked-icon-' + i));
+
+            arr_checkboxes[i].addEventListener('change', () => {
+            if (arr_checkboxes[i].checked) {
+                arr_checked_icons[i].setAttribute('style', 'text-align:center;display:inline;');
+                arr_unchecked_icons[i].setAttribute('style', 'display:none');
+            } else {
+                arr_checked_icons[i].setAttribute('style', 'display:none');
+                arr_unchecked_icons[i].setAttribute('style', 'text-align:center;display:inline;');
+            }
+        });
+    });
+
+
+    }
+
+    </script>
+{% endblock %}

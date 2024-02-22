@@ -1,0 +1,35 @@
+{% extends "navbar.html" %}
+{% block listing %}
+{% load static %}
+    <div class="b-example-divider"></div>
+    <div style="margin-top:5%;" class="container d-flex align-items-center justify-content-center">
+      <div class="col-3">
+
+        <form method="POST" action="">
+          <img class="mb-4" src="{% static 'lion_logo.png' %}" alt="" width="92" height="92">
+          <h3 class="h3 mb-3 fw-normal">Добро пожаловать</h3>
+          {% csrf_token %}
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto">
+              <input type="text" name="username" class="form-control" placeholder="Логин">
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto">
+              <input type="password" name="password" class="form-control" placeholder="Пароль">
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto ">
+              <button class="btn btn-primary w-100 py-2 g-2" type="submit"><b>Войти</b></button>
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col-8 mx-auto">
+              <a class="btn btn-outline-primary w-100 py-2 g-2" href="{% url 'signup' %}">Создать аккаунт</a>
+            </div>
+          </div>
+        </form>
+    </div>
+
+{% endblock %}

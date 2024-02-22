@@ -1,0 +1,217 @@
+{% extends "navbar.html" %}
+{% block listing %}
+{% load static %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col card shadow p-4">
+            <div class="row">
+                <div class="col-2">
+                    <div class="list-group">
+                      <button type="button" id="button1" class="list-group-item list-group-item-action active"
+                              hx-get="{% url 'search' %}"
+                              hx-target="#search-results-div"
+                              hx-get="outerHTML"
+                              hx-trigger="submit, input delay:0.2s">Продажа</button>
+                      <button type="button" id="button2" class="list-group-item list-group-item-action">Аренда</button>
+                    </div>
+                    <div class="col mt-2">{{ my_filter.form.id }}</div>
+                </div>
+                <div class="col-10">
+                    <form method="get" class="form-inline justify-content-center"
+                    hx-get="{% url 'search' %}"
+                    hx-target="#search-results-div"
+                    hx-get="outerHTML"
+                    hx-trigger="submit, input delay:0.3s"
+                    >
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-text col-6">
+                                            <b>Тип</b>
+                                        </div>
+                                        {{my_filter.form.property_type}}
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <b>Цена</b>
+                                        </div>
+                                        <div class="input-group-text">
+                                            от
+                                        </div>
+                                        {{my_filter.form.sale_price__gte}}
+                                        <div class="input-group-text">
+                                            до
+                                        </div>
+                                        {{my_filter.form.sale_price__lte}}
+                                        <div class="input-group-text">
+                                            $
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <b>Площадь</b>
+                                        </div>
+                                        <div class="input-group-text">
+                                            от
+                                        </div>
+                                        {{my_filter.form.gross_area__gte}}
+                                        <div class="input-group-text">
+                                            до
+                                        </div>
+                                        {{my_filter.form.gross_area__lte}}
+                                        <div class="input-group-text">
+                                            м&#178;
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <div class="col-4">-->
+<!--                                    <div class="input-group">-->
+<!--                                        <div class="input-group-text col-6">-->
+<!--                                            Сдаётся в аренду-->
+<!--                                        </div>-->
+<!--                                        {{my_filter.form.rent_offered}}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-4">-->
+<!--                                    <div class="input-group">-->
+<!--                                        <div class="input-group-text col-6">-->
+<!--                                            Продаётся-->
+<!--                                        </div>-->
+<!--                                        {{my_filter.form.sale_offered}}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            Этаж
+                                        </div>
+                                        <div class="input-group-text">
+                                            от
+                                        </div>
+                                        {{my_filter.form.floor__gte}}
+                                        <div class="input-group-text">
+                                            до
+                                        </div>
+                                        {{my_filter.form.floor__lte}}
+                                        <div class="input-group-text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            Статус проекта
+                                        </div>
+                                        {{my_filter.form.project_status}}
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            Отопление
+                                        </div>
+                                        {{my_filter.form.heating}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row row-cols-1" id="search-results-div">
+    {% include 'search_results.html' %}
+    </div>
+    {% include 'search_paginator.html' %}
+</div>
+
+<script type="text/javascript" src="{% static 'htmx.min.js' %}"></script>
+
+<script>
+        // Add an event listener to toggle the active state
+        document.addEventListener("DOMContentLoaded", function () {
+            const button1 = document.getElementById("button1");
+            const button2 = document.getElementById("button2");
+
+            button1.addEventListener("click", function () {
+                // Toggle the active class for both buttons
+                button1.classList.add("active");
+                button2.classList.remove("active");
+            });
+
+            button2.addEventListener("click", function () {
+                // Toggle the active class for both buttons
+                button2.classList.add("active");
+                button1.classList.remove("active");
+
+            });
+        });
+    </script>
+
+<!--<script type="text/javascript"> &lt;!&ndash; Pagination JS script &ndash;&gt;-->
+
+<!--    function arrangePageQuery(urlPath, pageToNavigate) {-->
+<!--        if (window.location.href.includes("?" )) {-->
+<!--            // there's filter queries in url:-->
+<!--            window.location.href = urlPath + "&page=" + pageToNavigate;-->
+<!--        } else {-->
+<!--            // there's no filter queries:-->
+<!--            window.location.href = urlPath + "?page=" + pageToNavigate;-->
+<!--        }-->
+<!--    }-->
+
+<!--    function navigateUrl(fullPath, pageToNavigate) {-->
+
+<!--        if (window.location.href.includes("?page=")) {-->
+<!--            // to avoid appending when there is no filter queries, remove page query:-->
+<!--            let baseFullPath = window.location.href.split("?page=")[0]-->
+<!--            window.location.href = baseFullPath + "?page=" + pageToNavigate;-->
+<!--            return-->
+<!--        }-->
+
+<!--        if (window.location.href.includes("&page=")) {-->
+<!--            // to avoid appending when there is filter queries, remove page query-->
+<!--            let baseFullPath = window.location.href.split("&page=")[0]-->
+<!--            arrangePageQuery(baseFullPath, pageToNavigate);-->
+<!--        } else {-->
+<!--            arrangePageQuery(fullPath, pageToNavigate)-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+{% endblock %}
+
+
+<!--<div class="col-4">-->
+<!--    <div class="input-group">-->
+<!--        <div class="input-group-text">-->
+<!--            Рента-->
+<!--        </div>-->
+<!--        <div class="input-group-text">-->
+<!--            от-->
+<!--        </div>-->
+<!--        {{my_filter.form.rental_price__gte}}-->
+<!--        <div class="input-group-text">-->
+<!--            до-->
+<!--        </div>-->
+<!--        {{my_filter.form.rental_price__lte}}-->
+<!--        <div class="input-group-text">-->
+<!--            $/мес-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

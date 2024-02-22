@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+{% load static %}
+{% block navbar %}
+
+    <header class="p-3 mb-3 border-bottom" style="background-color:#0D6EFD;height:122px;">
+      <div class="container">
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between"> <!-- justify-content-between -->
+<!--          <div class=".navbar-brand justify-content-lg-start">-->
+
+            <a href="/"><img src="{% static 'lion_logo.png' %}" height="90" width="90"></a><strong style='color:#FFFFFF;font-weight:bold;font-family:"Righteous";font-size:18px;display: flex;
+        justify-content: center;'>COMPAS</strong>
+<!--          </div>-->
+
+          <div>
+            <ul class="nav">
+                  <li><span><a href="{% url 'login' %}" class="nav-link px-2 link-light"><b>Вход</b>  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16"><path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="col" style="margin:10px;">
+        {% if messages %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+            {% for message in messages %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>{{ message }}</strong>
+                  <button type="button" class="close btn" style="margin-top:8px;border:0px;" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><h4>&times;</h4></span></button>
+                </div>
+            {% endfor %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        {% endif %}
+    </div>
+<!--    -->
+    <ul class="nav justify-content-center" style="margin-vertical:18px;">
+<!--        <li class="nav-item">-->
+<!--        <a class="nav-link disabled" href="#"><b>Карта</b></a>-->
+<!--      </li>-->
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'listing' %}"><b>Все объявления</b></a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'createflat' %}"><b>Создать объявление</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><b>Мои объявления</b></a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="#"><b>Закладки</b></a>
+      </li>
+<!--        <li class="nav-item">-->
+<!--        <a class="nav-link disabled" href="#"><b>Подборки</b></a>-->
+<!--      </li>-->
+    </ul>
+    <hr>
+    <div>
+      {% block listing %}
+      {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "navbar.html" %}
+{% block listing %}
+{% load static %}
+
+<div class="container">
+  <div class="row">
+      <div class="col">
+            <form method="POST" action="{% url 'updateflat' pk %}" enctype="multipart/form-data"> {% csrf_token %}
+                <p>Вы уверены что хотите удалить фото?"</p>
+                <img src="{{ delete_data.photo.url }}">
+                <a href="{% url 'listing' %}" class="btn btn-success">Оставить</a>
+                <input type="submit" class="btn btn-danger" name="Confirm" value="Удалить">
+            </form>
+          </div>
+      </div>
+</div>
+
+{% endblock %}

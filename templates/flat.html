@@ -1,0 +1,254 @@
+{% extends "navbar.html" %}
+{% block listing %}
+{% load static %}
+
+<!-- flat.html -->
+<div class="container">
+  <div class="row">
+      <div class="col-6">
+          <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              {% for image in images %}
+                <li data-bs-target="#myCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+              {% endfor %}
+                <!-- Add more indicators for additional slides -->
+            </ol>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+              {% for image in images %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ image.img.url }}" alt="[[photo]]" width="100%" height="400px" style="border-radius:4px;">
+                </div>
+              {% endfor %}
+                <!-- Add more carousel items for additional slides -->
+            </div>
+
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Назад</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Вперед</span>
+            </a>
+          </div>
+  </div>
+          <div class="col-3">
+
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Квартира</th>
+                      <th scope="col">{{ flat.property_type }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Общая площадь</th>
+                      <td>{{ flat.gross_area }} м&#178;</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Жилая площадь</th>
+                      <td>{{ flat.net_area }} м&#178;</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Этаж</th>
+                      <td>{{ flat.floor }} из {{ flat.total_floors }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Отопление</th>
+                      <td>{{ flat.heating }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row"></th>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Статус проекта</th>
+                      <td>{{ flat.project_status }}</td>
+                    </tr>
+                    {% if flat.bedrooms or flat.bathrooms or flat.wc or flat.balcony %}
+                    <tr>
+                      <th scope="row"></th>
+                      <td></td>
+                    </tr>
+                    {% endif %}
+                    {% if flat.bedrooms %}
+                    <tr>
+                      <th scope="row">Кол-во спален</th>
+                      <td>{{ flat.bedrooms }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if flat.bathrooms %}
+                    <tr>
+                      <th scope="row">Кол-во ванных</th>
+                      <td>{{ flat.bathrooms }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if flat.wc %}
+                    <tr>
+                      <th scope="row">Кол-во WC</th>
+                      <td>{{ flat.wc }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if flat.balcony %}
+                    <tr>
+                      <th scope="row">Кол-во балконов</th>
+                      <td>{{ flat.balcony }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+          </div>
+      <div class="col-3">
+              <table class="table">
+                  <tbody>
+                    {% if flat.sale_offered == True %}
+                    <tr>
+                      <th scope="col" style="color:#198754;">Продаётся</th>
+                      <th scope="col">{{ flat.sale_price }} $</th>
+                    </tr>
+                    <tr>
+                      <th scope="row">Тапу</th>
+                      <td>{% if flat.tapu %}Есть{% else %}Нет{% endif %}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Искан</th>
+                      <td>{% if flat.iskan %}Есть{% else %}Нет{% endif %}</td>
+                    </tr>
+                    {% endif %}
+                    {% if rent_offered %}
+                    <tr>
+                      <th scope="row"></th>
+                      <td></td>
+                    </tr>
+                    {% endif %}
+                    {% if flat.rent_offered == True %}
+                    <tr>
+                      <th scope="col" style="color:#198754;">Сдаётся в аренду</th>
+                      <th scope="col">{{ flat.rental_price }} $/мес</th>
+                    </tr>
+                    <tr>
+                      <th scope="row">Депозит</th>
+                      <td>{{ flat.deposit }} $</td>
+                    </tr>
+                    <tr>
+                      <th scope="row"></th>
+                      <td></td>
+                    </tr>
+                    {% endif %}
+                    {% if flat.condo_fee %}
+                    <tr>
+                      <th scope="row">Айдат</th>
+                      <td>{{ flat.condo_fee }} TL/мес</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+          </div>
+      <div class="row mt-3 g-1">
+          <div class="col">
+              <div class="input-group">
+                  <div class="col-1 input-group-text"><b>В квартире</b></div>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.furnitured == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Мебель
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.internet == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Интернет
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.conditioner == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Кондиционер
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.fridge == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Холодильник
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.cooker == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Плита
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.washer == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Стиралка
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.dish_washer == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Посудомойка
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.sea_view == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Вид на море
+                  </button>
+              </div>
+          </div>
+      </div>
+      <div class="row mt-1 g-1">
+          <div class="col">
+              <div class="input-group">
+                  <div class="col-1 input-group-text"><b>В ЖК</b></div>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.private_territory == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Территория
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.security == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Охрана 24/7
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.parking == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Парковка
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.pool == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Бассейн
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.playground == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Площадка
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.reserve_generator == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Генератор
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.gym == True %}btn-success{% else %}btn-danger {% endif %}">
+                      Спортзал
+                  </button>
+                  <button disabled style="opacity: 0.8;" class="col btn {% if flat.spa == True %}btn-success{% else %}btn-danger {% endif %}">
+                      СПА
+                  </button>
+              </div>
+          </div>
+      </div>
+      <div class="row g-2 mt-3">
+          <script>
+              var latitude = {{ flat.lat }}
+              var longitude = {{ flat.lng }}
+          </script>
+          <div  id="map" class="col-6">
+<!--              <img src="{% static 'map_placeholder.png' %}" alt="[[MAP]]" width='100%' style="border-radius:4px;">-->
+          </div>
+
+<!--              SECURITY API KEY -->
+            <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+        ({key: "AIzaSyDiivIFK-unpXiSgvzyBFKxzn79NVnk0N4", v: "weekly"});</script>
+          <div class="col-6">
+              <div class="row">
+                  <div class="input-group justify-content-center">
+                      <a href="{% url 'updateflat' flat.id %}" class="col-4 btn btn-primary"><b>Редактировать</b></a>
+                      <a href="{% url 'deleteflat' flat.id %}" class="col-4 btn btn-danger"><b>Удалить</b></a>
+                  </div>
+              </div>
+              {% if flat.comment %}
+              <div class="row g-1 mt-1">
+                  <h5><b>Комментарий фотографа:</b> "{{ flat.comment }}"</h5>
+              </div>
+              {% endif %}
+              <br>
+              <div class="row g-1 mt-1">
+                  <h4 style="color:#479F76;">+7 910 458 68 68</h4>
+              </div>
+              <div class="row g-1 mt-1">
+                  <h4 style="color:#479F76;">Сергей</h4>
+              </div>
+              <br>
+               <div class="row g-1 mt-1">
+                  <h5>Не стесняйтесь звонить, Собственники это любят.</br> Договоритесь о просмотре и обсудите коммерцию при встрече.</br> Удачи!</h5>
+              </div>
+              </div>
+          </div>
+      </div>
+</div>
+
+{% endblock %}

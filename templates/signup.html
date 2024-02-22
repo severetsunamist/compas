@@ -1,0 +1,41 @@
+{% extends "navbar.html" %}
+{% block listing %}
+<!--{{ form.media }}-->
+{% load static %}
+
+    <div style="margin-top:5%;" class="container d-flex align-items-center justify-content-center">
+      <div class="col-3">
+
+        <form method="POST" action="">
+          <img class="mb-4" src="{% static 'lion_logo.png' %}" alt="" width="92" height="92">
+          <h3 class="h3 mb-3 fw-normal">Регистрация</h3>
+          {% csrf_token %}
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto">
+            {{ form.username }}
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto">
+            {{ form.email }}
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto">
+            {{ form.password1 }}
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto">
+            {{ form.password2 }}
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col mx-auto ">
+              <button class="btn btn-primary w-100 py-2 g-2" type="submit">Создать аккаунт</button>
+            </div>
+          </div>
+        </form>
+    </div>
+
+{% endblock %}
